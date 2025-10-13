@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 de la guia 2 php</title>
+</head>
+
+<body>
+    <h2>Ejercicios guia 2</h2>
+    <h3>Del ejercicio #1 al ejercicio #5</h3>
+    <p>1. Uso del $_post, para capturar los datos.<br>
+        2 y 3. Uso del empty, para verificar que no estuviera vacio, uso del is_numeric para valores numericos,
+        uso del filter_var para filtar y validar el email.<br>
+        4.Boton con el atributo $_SESSION y el valor session_start-.<br>
+        5. Uso del isset($_SESSION) y uso de la funcion session_destroy y session_unset, junto
+        con el header("Location"), para redirigir a otra home.
+    </p>
+    <form action="ejercicios.php" method="post">
+        <label for="fname">First name</label><br />
+        <input type="text" id="fname" name="fname" placeholder="First name" required><br />
+        <label for="lname">Last name</label><br />
+        <input type="text" id="lname" name="lname" placeholder="Last name" required><br />
+        <label for="fage">age</label><br />
+        <input type="number" id="fage" name="fage" placeholder="Age" required><br />
+        <!--Parte 3, correo electronico-->
+        <label for="femail">Email</label><br />
+        <input type="email" id="femail" name="femail" placeholder="Email" required><br />
+        <label for="pwd">Password</label><br />
+        <input type="password" id="password" name="password" placeholder="password" required><br />
+        <input type="submit" value="submit">
+    </form>
+    <h3>Ejercicio 6</h3>
+    <form action="colorCookie.php" method="post">
+        <input type="submit" value="submit">
+    </form>
+
+
+</body>
+
+</html>
