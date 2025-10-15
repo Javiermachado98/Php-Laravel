@@ -1,0 +1,1 @@
+1. Importante tener en cuenta que, index llama a controller, controller llama a model

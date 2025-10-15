@@ -1,0 +1,13 @@
+# Activar el módulo de reescritura
+RewriteEngine On
+
+# Si la petición no es a un archivo existente
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Y si la petición no es a un directorio existente
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirigir todas las peticiones al index.php
+# $1 captura la URL solicitada, y '?' asegura que la cadena de consulta (query string) se
+mantenga.
+RewriteRule ^(.*)$ index.php [QSA,L]

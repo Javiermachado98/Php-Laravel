@@ -2,13 +2,12 @@
 // index.php?action=login
 
 
-class Controller
+class Controller 
 {
+    private $model;
 
 
-
-
-    function login()
+    public function login()
     {
         $errores = [];
         session_start();
