@@ -12,10 +12,10 @@ class UserModel
     private $password = 'consultorpass';
     private $myMachine = 'localhost';
     private $dataBase = 'practicaservidor';
-    private $connection;
+    public $connection;
     private $table = 'myusers';
     private $url = '';
-
+ 
     public function __construct()
     {/*toca crear siempre el dsn que es un data source name y se usa para conectarse
        a la base de datos lleva el nombre del controlador PDO
@@ -28,12 +28,15 @@ class UserModel
         }
 
     }
-    public function query($sql, $params = [])
+    public function query($sql, array $params)
     {
         $stmt = $this->connection->prepare($sql);
         $stmt->execute($params);
         return $stmt->fetchAll();
     }
+
+
+    public 
 
 }
 ?>

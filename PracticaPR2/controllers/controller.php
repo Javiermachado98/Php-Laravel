@@ -5,6 +5,9 @@
 class Controller 
 {
     private $model;
+    public function __construct(){
+        $this->model = UserModel();
+    }
 
 
     public function login()
@@ -55,6 +58,21 @@ class Controller
             echo "Error: " . $e->getMessage();
         }
 
+    }
+
+    public function showUser(){
+
+    }
+
+    public function loginOut(){
+        
+        if(isset($_POST['cerrar_sesion'])){
+        // funciones que pueden ser importantes
+        session_unset(); // esto limpia todas las variables
+        session_destroy();
+        header("Location: ejercicio1.html"); // devuelve a otra pagina, preguntar si se debe hacer otra cosa
+        exit;
+    }
     }
 
 
