@@ -11,6 +11,8 @@ try {
         case 'home':
             if (!isset($_SESSION['usuario_id'])) {
                 $controller->login();
+            }else {
+                $
             }
     }
 } catch (Exception $e) {

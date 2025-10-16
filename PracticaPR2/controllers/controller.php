@@ -4,51 +4,65 @@
 
 class Controller 
 {
+    var $errores = [];
     private $model;
+    private $userName;
+    private $userPassword;
     public function __construct(){
-        $this->model = UserModel();
+        $this->model = new UserModel();
     }
 
+    function validateUser(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $this->userName = trim(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            if (empty($userName)) {
+                //importante poner el this
+                $this->errores[] = "El nombre es obligatorio";
+                // podemos hacer un elif para verificar la longitud y parametros incorrectos
+                //no es obligatoria, se puede saltar
+            } elseif (strlen($userName) < 3 || strlen($userName) > 20) {
+                $this->$errores[] = "El usuario no cumple la cantidad de caracteres, deben ser mas de 3 menos de 20";
+            }
+        }
+    }
+
+    public function validatePassword(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){// Importante primero se debe verificar el request
+            $this->userPassword = trim(filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+            // si pongo esta linea no debo poner el $userName = $_post
+            if (empty($userPassword)) {
+                $errores[] = "La contraseña esta vacia";
+            } elseif (strlen($userPassword) < 3 || strlen($userPassword) > 20) {
+                $errores[] = "El usuario no cumple la cantidad de caracteres, en la contraseña deben ser minimo 6 y maximo 20";
+            }
+        }
+    }
 
     public function login()
     {
-        $errores = [];
-        session_start();
+        session_start();    
+        $this->validateUser();
+        $this->validatePassword();
         $_SESSION['usuario_id'] = "javier";
-        if ($_SERVER["REQUEST_METHOD"] == "POST") { // Importante primero se debe verificar el request
-            $name = trim(filter_input(INPUT_POST, 'fname', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-            // si pongo esta linea no debo poner el $name = $_post
-            $password = trim(filter_input(INPUT_POST, 'pwd', FILTER_SANITIZE_FULL_SPECIAL_CHARS));
-            // aqui ya estamos verificando que no queden espacios
-
-            if (empty($name)) {
-                $errores[] = "El nombre es obligatorio";
-                // podemos hacer un elif para verificar la longitud y parametros incorrectos
-                //no es obligatoria, se puede saltar
-            } elseif (strlen($name) < 3 || strlen($name) > 20) {
-                $errores[] = "El usuario no cumple la cantidad de caracteres, deben ser mas de 3 menos de 20";
-            }
-
-            if (empty($password)) {
-                $errores[] = "La contraseña esta vacia";
-            } elseif (strlen($password) < 3 || strlen($password) > 20) {
-                $errores[] = "El usuario no cumple la cantidad de caracteres, en la contraseña deben ser minimo 6 y maximo 20";
-            }
-
             if (!empty($errores)) { // esto lo deberia poner para saber que esta dando error
                 foreach ($errores as $error) {
                     echo "<p>$error</p>";
                 }
             }
-
             if (empty($errores)) {
-                echo "Login Correcto para el usuario: " . $name;// esto me ayuda a depurar que si estuvo ok
+                echo "Login Correcto para el usuario: " . $this->userName;// esto me ayuda a depurar que si estuvo ok
             }
+            if(empty($errores)){
+            echo "Hola, " . $name . "<br/>";
+            //Inicio de sesion (aqui empezamos a redirigir a otros archivos)
+            echo "Bienvenido: " . $_SESSION["usuario_id"]; // Importante esto es lo que crea el id de php para el usuario
+            echo "<br><a href='dashboard.php'>Ir a la pagina de bienvenida</a>"; // esto lo hacemos para redirigir al mensaje de bienvenida
+        }
         }
 
-    }
+}
 
-    public function accessDatabase()
+    /*public function accessDatabase()
     {
         require_once 'model.php';
         try {
@@ -58,13 +72,10 @@ class Controller
             echo "Error: " . $e->getMessage();
         }
 
-    }
+    }*/
 
-    public function showUser(){
 
-    }
-
-    public function loginOut(){
+    /*public function loginOut(){
         
         if(isset($_POST['cerrar_sesion'])){
         // funciones que pueden ser importantes
@@ -73,12 +84,6 @@ class Controller
         header("Location: ejercicio1.html"); // devuelve a otra pagina, preguntar si se debe hacer otra cosa
         exit;
     }
-    }
-
-
-
-}
-
-
+    }*/
 
 ?>
