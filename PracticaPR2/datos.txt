@@ -1,1 +1,4 @@
 1. Importante tener en cuenta que, index llama a controller, controller llama a model
+2. En todo el controller solo se necesita hacer la validacion 1 sola vez, es decir solo entra si el usuario envio el formulario.
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+3. El operador ?? = significa null coalescing operator: Verifica si la variable existe y no es null.  Si existe, la usa; si no, usa un valor por defecto.
