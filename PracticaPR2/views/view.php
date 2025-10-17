@@ -17,7 +17,7 @@
         3. El form debe llevar un method post o get
         4. IMPORTANTE revisar la funcion filterVar
         5. strlen() revisa la cantidad de caracteres-->
-        <form action="controllers/controller.php" method="post">
+        <form action="index.php?action=processLogin" method="POST">
             <label for="fname">User name</label>
             <input type="text" placeholder="Enter name" id="fname" name="fname" required> <br>
             <label for="pwd">Password</label>

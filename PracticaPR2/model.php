@@ -35,9 +35,6 @@ class UserModel
         return $stmt->fetchAll();
     }
 
-
-    public 
-
 }
 ?>
 
